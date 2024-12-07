@@ -18,7 +18,7 @@ v=65/3.6;
 H=0.24;
 L=1;
 
-% Starttid
+% Initial conditions
 t_0 = 0;
 y0 = [0; 0; 0; 0];
 
@@ -33,10 +33,10 @@ A = [0, 0, 1, 0;
 
 g = @(t) [0; 0; 0; (c2 * dh_dt(t) + k2 * h(t)) / m2];
 
-% hittar alla egenvärden
+% Find all the eigenvalues of A
 ev = eig(A);
 
-%Ska bli vår lista med maximal tid%
+% ls is the list containing the "maximal" time for each lambda
 ls = [];
 
 for k = 1:length(ev)
@@ -46,16 +46,16 @@ for k = 1:length(ev)
     ls(k) = -2 / abs_lambda_k_sq * Re_lambda_k;
 end
 
-% hittar minimala egenvärde, som ger maximala tid (b)
+% finds the minimal maximal eigenvalue, which gives the minimal time (b)
 delta_max = min(ls);
 
 % Display result with formatted output
-fprintf('Maximal tid blir %f\n', delta_max);
+fprintf('The maximal time is %f\n', delta_max);
 
 if is_question_d
     alpha = 0.1;
 else
-    alpha = input('Korrigerande faktor alpha: ');
+    alpha = input('Corrected alpha factor: ');
 end
 
 
@@ -66,7 +66,7 @@ delta_max_ny = delta_max * alpha;
 % is equal to 1.1181e-05
 disp(delta_max_ny)
 
-n=input('Ange antal steg: '); 
+n=input('Provide the number of steps: '); 
 h_s=(delta_max_ny-t_0)/n; 
 disp(['h= ' num2str(h_s) '.']); 
 
@@ -74,4 +74,4 @@ disp(['h= ' num2str(h_s) '.']);
 tspan=[t_0 delta_max_ny];
 [tv,yv]=EulerSyst(@(t,y) f2by2(y, A, g(t)), tspan, y0, n);
 plot(tv,yv(1,:),'b-', tv,yv(2,:), 'r-'); 
-title(sprintf('Eulersmetod tidsintervall %f, från alpa-faktor %f', delta_max_ny, alpha));
+title(sprintf('Euler method: Δt=%f, α=%f, n=%f, ', delta_max_ny, alpha, n));
