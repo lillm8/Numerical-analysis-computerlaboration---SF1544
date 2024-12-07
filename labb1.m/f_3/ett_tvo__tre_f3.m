@@ -1,3 +1,4 @@
+addpath('./');
 m1=475;
 m2=53;
 k1 = 5400;
@@ -11,6 +12,7 @@ L=1;
 
 % Starttid
 t_0 = 0;
+y0 = [0; 0; 0; 0];
 
 h = @(t) (t > L/v) .* 0 + (t <= L/v) .* ((H / 2) * (1 - cos((2 * pi * v * t) / L)));
 dh_dt = @(t) (t > L/v) .* 0 + (t <= L/v) .* (H * pi * v / L) * sin((2 * pi * v * t) / L);
@@ -23,16 +25,20 @@ A = [0, 0, 1, 0;
 
 g = @(t) [0; 0; 0; (c2 * dh_dt(t) + k2 * h(t)) / m2];
 
-
-eigenvalues = eig(A);
+% hittar alla egenvärden
+ev = eig(A);
 
 %Ska bli vår lista med maximal tid%
 ls = [];
-for d = 1:length(eigenvalues)
-    lambda = eigenvalues(d);
-    ls(end + 1) = -2 * real(lambda) / abs(lambda)^2; 
+
+for k = 1:length(ev)
+    lambda_k = ev(k);
+    Re_lambda_k = real(lambda_k);
+    abs_lambda_k_sq = real(lambda_k)^2 + imag(lambda_k)^2;
+    ls(k) = -2 / abs_lambda_k_sq * Re_lambda_k;
 end
 
+% hittar minimala egenvärde, som ger maximala tid (b)
 delta_max = min(ls);
 
 % Display result with formatted output
@@ -48,7 +54,7 @@ disp(['h= ' num2str(h_s) '.']);
 
 
 tspan=[t_0 delta_max_ny];
-[tv,yv]=EulerSyst(@(t,y) f2by2(t, y, A, g(t)), tspan, y0, n);
+[tv,yv]=EulerSyst(@(t,y) f2by2(y, A, g(t)), tspan, y0, n);
 plot(tv,yv(1,:),'b-', tv,yv(2,:), 'r-'); 
-title('Eulersmetod tidsintervall %f, från alpa-faktor %f',delta_max_ny ,alpha);
+title(sprintf('Eulersmetod tidsintervall %f, från alpa-faktor %f', delta_max_ny, alpha));
 

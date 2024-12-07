@@ -1,3 +1,5 @@
+addpath('./');
+
 m1=475;
 m2=53;
 k1 = 5400;
@@ -50,8 +52,8 @@ options = odeset('RelTol', 1e-6, 'AbsTol', 1e-9);
 
 % Sammanställt output av ODE-45 och Eulers metod
 [t, y] = ode45(ode_system, tspan_2, y0, options);
-[tv_1,yv_1]=EulerSyst(@(t,y) f2by2(t, y, A, g(t)), tspan_1, y0, n);
-[tv_2,yv_2]=EulerSyst(@(t,y) f2by2(t, y, A, g(t)), tspan_2, y0, n);
+[tv_1,yv_1]=EulerSyst(@(t,y) f2by2(y, A, g(t)), tspan_1, y0, n);
+[tv_2,yv_2]=EulerSyst(@(t,y) f2by2(y, A, g(t)), tspan_2, y0, n);
 
 
 figure('Position',[100, 100, 800, 800]);
