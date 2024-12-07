@@ -4,6 +4,14 @@ m2=53;
 k1 = 5400;
 k2 = 135000;
 
+is_question_d = false;
+
+% Question (d)
+% k2 = 100 * k2
+if is_question_d
+    k2 = 100 * k2;
+end
+
 c1=310;
 c2=1200;
 v=65/3.6;
@@ -44,9 +52,19 @@ delta_max = min(ls);
 % Display result with formatted output
 fprintf('Maximal tid blir %f\n', delta_max);
 
-alpha = input('Korrigerande faktor alpha: ');
+if is_question_d
+    alpha = 0.1;
+else
+    alpha = input('Korrigerande faktor alpha: ');
+end
+
 
 delta_max_ny = delta_max * alpha;
+
+% \Delta max
+% d) - asks us to change alpha = 0.1 and observe the new \Delta_max, which
+% is equal to 1.1181e-05
+disp(delta_max_ny)
 
 n=input('Ange antal steg: '); 
 h_s=(delta_max_ny-t_0)/n; 
@@ -56,3 +74,4 @@ disp(['h= ' num2str(h_s) '.']);
 tspan=[t_0 delta_max_ny];
 [tv,yv]=EulerSyst(@(t,y) f2by2(y, A, g(t)), tspan, y0, n);
 plot(tv,yv(1,:),'b-', tv,yv(2,:), 'r-'); 
+title(sprintf('Eulersmetod tidsintervall %f, från alpa-faktor %f', delta_max_ny, alpha));
