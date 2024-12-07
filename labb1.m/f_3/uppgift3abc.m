@@ -25,7 +25,7 @@ A = [0, 0, 1, 0;
 
 g = @(t) [0; 0; 0; (c2 * dh_dt(t) + k2 * h(t)) / m2];
 
-
+% hittar alla egenvärden
 ev = eig(A);
 
 %Ska bli vår lista med maximal tid%
@@ -38,6 +38,7 @@ for k = 1:length(ev)
     ls(k) = -2 / abs_lambda_k_sq * Re_lambda_k;
 end
 
+% hittar minimala egenvärde, som ger maximala tid (b)
 delta_max = min(ls);
 
 % Display result with formatted output
