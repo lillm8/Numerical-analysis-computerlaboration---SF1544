@@ -20,6 +20,7 @@ L=1;
 
 % Initial conditions
 t_0 = 0;
+T = 1;
 y0 = [0; 0; 0; 0];
 
 h = @(t) (t > L/v) .* 0 + (t <= L/v) .* ((H / 2) * (1 - cos((2 * pi * v * t) / L)));
@@ -66,12 +67,11 @@ delta_max_ny = delta_max * alpha;
 % is equal to 1.1181e-05
 disp(delta_max_ny)
 
-n=input('Provide the number of steps: '); 
-h_s=(delta_max_ny-t_0)/n; 
-disp(['h= ' num2str(h_s) '.']); 
+h_s=delta_max_ny; 
+n = round((T-t_0)/h_s);
+disp(['h= ' num2str(h_s) '.']);
 
-
-tspan=[t_0 delta_max_ny];
+tspan=[t_0, T];
 [tv,yv]=EulerSyst(@(t,y) f2by2(y, A, g(t)), tspan, y0, n);
 plot(tv,yv(1,:),'b-', tv,yv(2,:), 'r-'); 
 title(sprintf('Euler method: Δt=%f, α=%f, n=%f, ', delta_max_ny, alpha, n));
