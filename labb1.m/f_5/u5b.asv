@@ -1,21 +1,21 @@
 % Initial guess
 
-% Tre gissningar som konvergerar till rätt k_1:
+% Tre gissningar som leder till rätt k_1:
 % (k1, k2) = 
 % (3000, 240000)
 % (2000, 80000)
 % (7000, 100000)
-
-
-% Tre gissningar som inte konvergerar: 
-% (k1, k2) = 
-% (70000, 5000)
 % (400000, 80000)
-% (700000, 15400)
+
+
+% Tre gissningar som inte konvergerar till korrekt k_1: 
+% (k1, k2) = 
+% (15400, 15400)
+% (400000, 60000)
 
 
 
-k1 = 700000; k2 = 15400;
+k1 = 2000; k2 = 80000;
 guess = [k1, k2]';
 k_0 = guess;
 
