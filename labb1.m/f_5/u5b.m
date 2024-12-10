@@ -15,7 +15,7 @@
 
 
 
-k1 = 700000; k2 = 15400;
+k1 = 3000; k2 = 24000;
 guess = [k1, k2]';
 k_0 = guess;
 
@@ -67,3 +67,4 @@ title('Convergence of k2');
 legend;
 grid on;
 hold off;
+

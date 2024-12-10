@@ -50,6 +50,8 @@ theta = 0.5; % Trapetsmetoden
 delta_t_vals = delta_max * [1, 1/2, 1/4, 1/8];
 max_errors = [];
 
+ero = 1;
+i = 0;
 for dt = delta_t_vals
     h_s = dt;
     n = round((T - t_0) / h_s);
@@ -65,6 +67,13 @@ for dt = delta_t_vals
     
     fprintf('Max error c_1: %.15f\n', error1);
     fprintf('Max error c_2: %.15f\n', error2);
+     
+    if i == 1;
+        fprintf('Konvergensordningen är ', log(ero/error2)/log(2));
+    end
+    i = 1;
+    ero = error2;
+   
 end
 
 plot(ref_t, ref_y(:, 2), 'k-', 'DisplayName', 'Referenslösning');
@@ -72,3 +81,8 @@ hold on;
 plot(ref_t, yv_interp(2, :), 'r--', 'DisplayName', 'EulerSyst\_4');
 legend;
 hold off;
+
+
+
+
+
