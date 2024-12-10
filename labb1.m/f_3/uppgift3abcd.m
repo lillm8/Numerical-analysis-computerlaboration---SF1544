@@ -4,7 +4,7 @@ m2=53;
 k1 = 5400;
 k2 = 135000;
 
-is_question_d = false;
+is_question_d = true;
 
 % Question (d)
 % k2 = 100 * k2
