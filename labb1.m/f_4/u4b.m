@@ -38,7 +38,7 @@ for k = 1:length(ev)
     abs_lambda_k_sq = real(lambda_k)^2 + imag(lambda_k)^2;
     ls(k) = -2 / abs_lambda_k_sq * Re_lambda_k;
 end
-delta_max = min(ls);
+delta_max = min(ls);x
 fprintf('Maximalt tidssteg: %f\n', delta_max);
 
 % Generera referenslösning med ode45
