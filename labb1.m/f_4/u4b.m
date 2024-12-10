@@ -69,7 +69,7 @@ for dt = delta_t_vals
     fprintf('Max error c_2: %.15f\n', error2);
      
     if i == 1;
-        fprintf('Konvergensordningen är ', log(ero/error2)/log(2));
+        fprintf('Konvergensordningen är %f\n', log(ero/error2)/log(2));
     end
     i = 1;
     ero = error2;
