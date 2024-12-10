@@ -38,7 +38,7 @@ for k = 1:length(ev)
     abs_lambda_k_sq = real(lambda_k)^2 + imag(lambda_k)^2;
     ls(k) = -2 / abs_lambda_k_sq * Re_lambda_k;
 end
-delta_max = min(ls);x
+delta_max = min(ls);
 fprintf('Maximalt tidssteg: %f\n', delta_max);
 
 % Generera referenslösning med ode45
@@ -57,12 +57,18 @@ for dt = delta_t_vals
     
     % Interpolera till referenslösningens tidspunkter
     yv_interp = interp1(tv, yv', ref_t)';
-    
+
     % Beräkna max abs-fel i komponent z_2
     error1 = max(abs(yv_interp(1, :) - ref_y(:, 1)'));
     error2 = max(abs(yv_interp(2, :) - ref_y(:, 2)'));
 
     
-    fprintf('Max error c_1: %f\n', error1);
-    fprintf('Max error c_2: %f\n', error2);
+    fprintf('Max error c_1: %.15f\n', error1);
+    fprintf('Max error c_2: %.15f\n', error2);
 end
+
+plot(ref_t, ref_y(:, 2), 'k-', 'DisplayName', 'Referenslösning');
+hold on;
+plot(ref_t, yv_interp(2, :), 'r--', 'DisplayName', 'EulerSyst\_4');
+legend;
+hold off;
