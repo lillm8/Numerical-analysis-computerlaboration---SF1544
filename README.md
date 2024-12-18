@@ -204,5 +204,5 @@ To see that these values do infact increase comfort, that is, decrease the ampli
 We see that indeed, the height of the bumps have reduced while maintaining the same functionality.
 
 ## Comments and Improving Points
-The current model of the car uses only one wheel (idealized to not account for size and friction at that) and two springs, which is an unrealistic oversimplification. We also worked with an idealized scenario with simple mathematically describable and smooth terrain in slow speeds which allows us to overlook the physical impact of the [jump-conditions for the wheel](https://www.comsol.com/blogs/the-physics-of-a-hopping-hoop). 
+The current model of the car uses only one idealized wheel that does not account for size and friction at that which is an oversimplification for ambigous terrain (which was chosen by our function $h$). The "road" that was very easily mathematically describable and smooth, and was run over in slow speeds which allows us to overlook the physical impact of the [jump-conditions for the wheel](https://www.comsol.com/blogs/the-physics-of-a-hopping-hoop). 
 For further improvements a half-car model could be presented, taking into account two of the four wheels. This provides a more realistic simulation of how the car behaves in uneven territory.
