@@ -12,7 +12,7 @@
 % (700000, 15400)
 
 % Startparametrar
-k1 = 3000; k2 = 24000;
+k1 = 7000; k2 = 100000;
 guess = [k1, k2]';
 k_0 = guess;
 
@@ -77,12 +77,13 @@ if length(errors) >= 3
         disp(['p är ', num2str(p)]);
         p_vals = [p_vals, p];
     end
-    disp(['Medelvärde för p: ', num2str(mean(p_vals))]);
 end
 
 % Plottning av konvergens
 figure;
-subplot(2, 1, 1);
+
+% First subplot
+subplot(3, 1, 1); % 3 rows, 1 column, first plot
 plot(1:i, accuracy_vals, 'o-', 'DisplayName', 'Accuracy');
 xlabel('Iteration');
 ylabel('Accuracy');
@@ -90,14 +91,22 @@ title('Konvergensmätning');
 grid on;
 legend;
 
-subplot(2, 1, 2);
+% Second subplot
+subplot(3, 1, 2); % 3 rows, 1 column, second plot
 plot(1:length(errors), errors, 'x-', 'DisplayName', 'Errors');
-hold on;
-if ~isempty(p_vals)
-    plot(2:length(p_vals)+1, p_vals, 'o-', 'DisplayName', 'p (konvergensordning)');
-end
 xlabel('Iteration');
-ylabel('Error och konvergensordning');
-title('Fel och konvergensordning');
+ylabel('Error');
+title('Fel');
 grid on;
 legend;
+
+% Third subplot
+subplot(3, 1, 3); % 3 rows, 1 column, third plot
+if ~isempty(p_vals)
+    plot(2:length(p_vals)+1, p_vals, 'o-', 'DisplayName', 'p (konvergensordning)');
+    xlabel('Iteration');
+    ylabel('Konvergensordning');
+    title('Konvergensordning');
+    grid on;
+    legend;
+end
